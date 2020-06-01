@@ -1,55 +1,55 @@
 Imports System
 
 Module Program
-    Structure twoblockship
+    Structure Twoblockship
         Dim blocks As Integer
-        Dim Hitcheck1 As String
-        Dim Hitcheck2 As String
+        Dim Hitcheck1 As Boolean
+        Dim Hitcheck2 As Boolean
         Dim sunk As String
     End Structure
 
 
     Structure Threeblockship
         Dim blocks As Integer
-        Dim Hitcheck1 As String
-        Dim Hitcheck2 As String
-        Dim Hitcheck3 As String
+        Dim Hitcheck1 As Boolean
+        Dim Hitcheck2 As Boolean
+        Dim Hitcheck3 As Boolean
         Dim sunk As String
     End Structure
 
     Structure Fourblockship
         Dim blocks As Integer
-        Dim Hitcheck1 As String
-        Dim Hitcheck2 As String
-        Dim Hitcheck3 As String
-        Dim Hitcheck4 As String
+        Dim Hitcheck1 As Boolean
+        Dim Hitcheck2 As Boolean
+        Dim Hitcheck3 As Boolean
+        Dim Hitcheck4 As Boolean
         Dim sunk As String
     End Structure
 
     Structure Fiveblockship
         Dim blocks As Integer
-        Dim Hitcheck1 As String
-        Dim Hitcheck2 As String
-        Dim Hitcheck3 As String
-        Dim Hitcheck4 As String
-        Dim Hitcheck5 As String
+        Dim Hitcheck1 As Boolean
+        Dim Hitcheck2 As Boolean
+        Dim Hitcheck3 As Boolean
+        Dim Hitcheck4 As Boolean
+        Dim Hitcheck5 As Boolean
         Dim sunk As String
     End Structure
 
 
-    Sub Main(args As String())
+    Sub Main()
         ' the Array that the board is on
         Dim board(10, 10) As String
         Dim shipcoords(5) As String
         ' defines the ships
-        Dim Destroyer As twoblockship
+        Dim Destroyer As Twoblockship
         Dim lightcruiser As Threeblockship
-        Dim submarine As Threeblockship
-        Dim heavycruiser As Fourblockship
-        Dim carrier As Fiveblockship
+        'Dim submarine As Threeblockship
+        'Dim heavycruiser As Fourblockship
+        'Dim carrier As Fiveblockship
         ' defines the coordinates for the destroyer
-        Dim A(5) As Integer
-        Dim B(5) As Integer
+        Dim UserXCords(5) As Integer
+        Dim UserYCords(5) As Integer
         Dim G, H, P, O, t As Integer
         ' sets the position for the destroyer
         Dim Answer(5) As String
@@ -79,12 +79,12 @@ Module Program
                     Console.WriteLine("wherew will your carrier be")
             End Select
             'Gets the inputted coordinates
-            A(t) = Console.ReadLine
-            B(t) = Console.ReadLine
+            UserXCords(t) = Console.ReadLine
+            UserYCords(t) = Console.ReadLine
 
 
             'Checks if the coordinates are on the board
-            If A(t) > 10 Or B(t) > 10 Then
+            If UserXCords(t) > 10 Or UserYCords(t) > 10 Then
                 End
             End If
             'asks which direction it wants to be
@@ -97,61 +97,55 @@ Module Program
                 Case 0
                     Select Case Answer(t)
                         Case "down"
-                            G = A(t) + 1
-                            H = B(t)
+                            G = UserXCords(t) + 1
+                            H = UserYCords(t)
                             If G > 10 Or H > 10 Then
                                 Console.WriteLine("outside the board")
                                 End
                             End If
-                            board(A(t), B(t)) = Destroyer.blocks
+                            board(UserXCords(t), UserYCords(t)) = Destroyer.blocks
                             board(G, H) = Destroyer.blocks
-                            shipcoords(1) = "destroyer:" + A(t) + "," + B(t) + "," + G + "," + H
                         Case "up"
-                            G = A(t) - 1
-                            H = B(t)
+                            G = UserXCords(t) - 1
+                            H = UserYCords(t)
                             If G > 10 Or H > 10 Then
                                 Console.WriteLine("outside the board")
                                 End
                             End If
-                            board(A(t), B(t)) = Destroyer.blocks
+                            board(UserXCords(t), UserYCords(t)) = Destroyer.blocks
                             board(G, H) = Destroyer.blocks
-                            shipcoords(1) = "destroyer:" + A(t) + "," + B(t) + "," + G + "," + H
                         Case "right"
-                            G = A(t)
-                            H = B(t) + 1
+                            G = UserXCords(t)
+                            H = UserYCords(t) + 1
                             If G > 10 Or H > 10 Then
                                 Console.WriteLine("outside the board")
                                 End
                             End If
-                            board(A(t), B(t)) = Destroyer.blocks
+                            board(UserXCords(t), UserYCords(t)) = Destroyer.blocks
                             board(G, H) = Destroyer.blocks
-                            H
-                            shipcoords(1) = A(t) + B(t) + G + H
                         Case "left"
-                            G = A(t)
-                            H = B(t) - 1
+                            G = UserXCords(t)
+                            H = UserYCords(t) - 1
                             If G > 10 Or H > 10 Then
                                 Console.WriteLine("outside the board")
                                 End
                             End If
-                            board(A(t), B(t)) = Destroyer.blocks
+                            board(UserXCords(t), UserYCords(t)) = Destroyer.blocks
                             board(G, H) = Destroyer.blocks
-                            shipcoords(1) = "destroyer:" + A(t) + "," + B(t) + "," + G + "," + H
                     End Select
                 Case 1
                     Select Case Answer(t)
                         Case "down"
-                            P = A(t) + 2
-                            G = A(t) + 1
-                            H = B(t)
-                            O = B(t)
+                            P = UserXCords(t) + 2
+                            G = UserXCords(t) + 1
+                            H = UserYCords(t)
+                            O = UserYCords(t)
                             If G > 10 Or H > 10 Then
                                 Console.WriteLine("outside the board")
                                 End
                             End If
-                            shipcoords(2) = "Light Cruiser:" + "X1:" + A(t) + ", Y1:" + B(t) + ", X2:" + G + ", Y2:" + H + ", X3:" + P + ", Y3" + O
                             For Y As Integer = 0 To 4
-                                If P = A(Y) Or G = A(Y) Then
+                                If P = UserXCords(Y) Or G = UserXCords(Y) Then
                                     Console.WriteLine("overlapping ships")
                                     End
                                 End If
@@ -159,13 +153,12 @@ Module Program
                             board(G, H) = "LC"
                             board(P, O) = "LC"
                         Case "up"
-                            P = A(t) - 2
-                            G = A(t) - 1
-                            H = B(t)
-                            O = B(t)
-                            shipcoords(2) = "Light Cruiser:" + "X1:" + A(t) + ", Y1:" + B(t) + ", X2:" + G + ", Y2:" + H + ", X3:" + P + ", Y3" + O
+                            P = UserXCords(t) - 2
+                            G = UserXCords(t) - 1
+                            H = UserYCords(t)
+                            O = UserYCords(t)
                             For Y As Integer = 0 To 4
-                                If P = A(Y) Or G = A(Y) Then
+                                If P = UserXCords(Y) Or G = UserXCords(Y) Then
                                     Console.WriteLine("overlapping ships")
                                     End
                                 End If
@@ -177,13 +170,13 @@ Module Program
                             board(G, H) = lightcruiser.blocks
                             board(P, O) = lightcruiser.blocks
                         Case "right"
-                            P = A(t)
-                            G = A(t)
-                            H = B(t) + 1
-                            O = B(t) + 2
-                            'shipcoords(2) =  A(t) + B(t) + G + H  + P + O
+                            P = UserXCords(t)
+                            G = UserXCords(t)
+                            H = UserYCords(t) + 1
+                            O = UserYCords(t) + 2
+
                             For Y As Integer = 0 To 4
-                                If H = B(Y) Or O = B(Y) Then
+                                If H = UserYCords(Y) Or O = UserYCords(Y) Then
                                     Console.WriteLine("overlapping ships")
                                     End
                                 End If
@@ -195,13 +188,13 @@ Module Program
                             board(G, H) = lightcruiser.blocks
                             board(P, O) = lightcruiser.blocks
                         Case "left"
-                            P = A(t)
-                            G = A(t)
-                            H = B(t) - 1
-                            O = B(t) - 2
-                            shipcoords(2) = "Light Cruiser:" + "X1:" + A(t) + ", Y1:" + B(t) + ", X2:" + G + ", Y2:" + H + ", X3:" + P + ", Y3" + O
+                            P = UserXCords(t)
+                            G = UserXCords(t)
+                            H = UserYCords(t) - 1
+                            O = UserYCords(t) - 2
+
                             For Y As Integer = 0 To 4
-                                If H = B(Y) Or O = B(Y) Then
+                                If H = UserYCords(Y) Or O = UserYCords(Y) Then
                                     Console.WriteLine("overlapping ships")
                                     End
                                 End If
@@ -214,52 +207,74 @@ Module Program
                             board(P, O) = lightcruiser.blocks
                     End Select
             End Select
-
-
         Next
 
+        Attack(board, Destroyer, lightcruiser)
+
         For i As Integer = 0 To 10
+
             For f As Integer = 0 To 10
-                Attack(shipcoords, Destroyer, lightcruiser)
+
                 If board(i, f) <> "" Then
+
                     If Destroyer.Hitcheck1 = True Then
+
                         Console.Write("Hit")
+
                     ElseIf lightcruiser.Hitcheck1 = True Then
+
                         Console.Write("Hit")
+
+                    ElseIf Destroyer.Hitcheck1 Then
+
+                        Console.Write("D")
+
+                    ElseIf lightcruiser.Hitcheck1 Then
+
+                        Console.Write("LC")
+                    Else
+
+                        Console.Write(board(i, f))
+
                     End If
-                    Console.Write(board(i, f))
+
                 Else
+
                     Console.Write(",")
+
                 End If
 
             Next
+
             Console.WriteLine("|")
+
         Next
+
+
     End Sub
 
-    Sub Attack(shipcoords As String(), Destroyer As twoblockship, lightcruiser As Threeblockship)
-        Dim attackcords1, attackcords2 As String
-        Dim attackcheck As String
-        Console.WriteLine("where will you attack")
-        attackcords1 = Console.ReadLine
-        attackcords2 = Console.ReadLine
-
-        For i As Integer = 0 To 5
-            If shipcoords(i).Contains(attackcords1) And shipcoords(i).Contains(attackcords2) Then
-                Console.WriteLine("Hit")
-                If shipcoords(i).Contains("destroyer") Then
+    Sub Attack(Board As String(,), Destroyer As Twoblockship, lightcruiser As Threeblockship)
+        Dim attackcoordY As String
+        Dim attackcoordX As String
+        Console.WriteLine("write your first coordinate")
+        attackcoordX = Console.ReadLine()
+        Console.WriteLine("write your second coordinate")
+        attackcoordY = Console.ReadLine()
+        If Board(attackcoordX, attackcoordY) <> "" Then
+            Select Case Board(attackcoordX, attackcoordY)
+                Case 2
                     Destroyer.Hitcheck1 = True
-                ElseIf shipcoords(i).Contains("Light Cruiser") Then
+
+                Case 3
                     lightcruiser.Hitcheck1 = True
-                End If
-            Else
-                Console.WriteLine("miss")
-            End If
-        Next
+
+            End Select
+        End If
+
 
     End Sub
 
-    Sub hit()
+    Sub Hit()
 
 
     End Sub
